@@ -31,23 +31,23 @@
     <div id="app" class="container">
       <div class="row">
         <div class="col">
-          <input type="number" />
+          <input type="number" :value="firstNumber" @input="firstNumber = $event.target.value, getCalculate()" />
         </div>
 
         <div class="col" style="display: flex; flex-direction: column; font-family: emoji">
-          <label><input type="radio" name="operator" value="sum" /> ➕</label>
-          <label><input type="radio" name="operator" value="subtract" /> ➖</label>
-          <label><input type="radio" name="operator" value="multiply" /> ✖</label>
-          <label><input type="radio" name="operator" value="divide" /> ➗</label>
+          <label><input type="radio" name="operator" v-model="sign" value="sum" checked @click="operator" @change="getCalculate()" /> ➕</label>
+          <label><input type="radio" name="operator" v-model="sign" value="subtract" @click="operator" @change="getCalculate()" /> ➖</label>
+          <label><input type="radio" name="operator" v-model="sign" value="multiply" @click="operator" @change="getCalculate()" /> ✖</label>
+          <label><input type="radio" name="operator" v-model="sign" value="divide" @click="operator" @change="getCalculate()" /> ➗</label>
         </div>
 
         <div class="col">
-          <input type="number" />
+          <input type="number" :value="secondNumber" @input="secondNumber = $event.target.value, getCalculate()" />
         </div>
 
         <div class="col">=</div>
 
-        <output class="col">0</output>
+        <output class="col">{{ output }}</output>
       </div>
     </div>
 
