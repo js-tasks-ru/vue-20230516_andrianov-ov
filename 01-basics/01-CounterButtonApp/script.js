@@ -4,13 +4,13 @@ const app = createApp({
   data() {
     return {
       counter: 0,
-    }
+    };
   },
   methods: {
     counterIncrement() {
-      return this.counter += 1;
-    }
-  }
+      return (this.counter += 1);
+    },
+  },
 });
 
 const vm = app.mount('#app');

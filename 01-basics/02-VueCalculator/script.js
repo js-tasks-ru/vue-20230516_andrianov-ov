@@ -1,6 +1,5 @@
 import { createApp } from './vendor/vue.esm-browser.js';
 
-// Создайте Vue приложение
 const app = createApp({
   data() {
     return {
@@ -8,7 +7,7 @@ const app = createApp({
       secondNumber: 0,
       output: 0,
       sign: 'sum',
-    }
+    };
   },
   computed: {
     operator() {
@@ -26,8 +25,8 @@ const app = createApp({
       } else {
         this.output = this.firstNumber / this.secondNumber;
       }
-    }
-  }
+    },
+  },
 });
 
-const vm = app.mount("#app");
+const vm = app.mount('#app');
