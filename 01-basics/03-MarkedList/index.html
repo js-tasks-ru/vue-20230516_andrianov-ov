@@ -14,10 +14,10 @@
     <div id="app" style="margin-top: 2rem">
       <div class="container">
         <div class="form-group">
-          <input type="search" @input="target = $event.target.value, filter" :value="target" />
+          <input type="search" v-model="target" />
         </div>
         <ul class="list">
-          <li v-for="email in emails">{{ email }}</li>
+          <li v-for="formatEmail in formatEmails" :class="formatEmail.class">{{ formatEmail.mail }}</li>
         </ul>
       </div>
     </div>

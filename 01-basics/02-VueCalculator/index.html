@@ -31,59 +31,18 @@
     <div id="app" class="container">
       <div class="row">
         <div class="col">
-          <input type="number" :value="firstNumber" @input="firstNumber = $event.target.value, getCalculate()" />
+          <input type="number" v-model="firstNumber" />
         </div>
 
         <div class="col" style="display: flex; flex-direction: column; font-family: emoji">
-          <label
-            ><input
-              type="radio"
-              name="operator"
-              v-model="sign"
-              value="sum"
-              checked
-              @click="operator"
-              @change="getCalculate()"
-            />
-            ➕</label
-          >
-          <label
-            ><input
-              type="radio"
-              name="operator"
-              v-model="sign"
-              value="subtract"
-              @click="operator"
-              @change="getCalculate()"
-            />
-            ➖</label
-          >
-          <label
-            ><input
-              type="radio"
-              name="operator"
-              v-model="sign"
-              value="multiply"
-              @click="operator"
-              @change="getCalculate()"
-            />
-            ✖</label
-          >
-          <label
-            ><input
-              type="radio"
-              name="operator"
-              v-model="sign"
-              value="divide"
-              @click="operator"
-              @change="getCalculate()"
-            />
-            ➗</label
-          >
+          <label><input type="radio" name="operator" value="sum" v-model="sign" checked /> ➕</label>
+          <label><input type="radio" name="operator" v-model="sign" value="subtract" /> ➖</label>
+          <label><input type="radio" name="operator" v-model="sign" value="multiple" /> ✖</label>
+          <label><input type="radio" name="operator" v-model="sign" value="divide" /> ➗</label>
         </div>
 
         <div class="col">
-          <input type="number" :value="secondNumber" @input="secondNumber = $event.target.value, getCalculate()" />
+          <input type="number" v-model="secondNumber" />
         </div>
 
         <div class="col">=</div>

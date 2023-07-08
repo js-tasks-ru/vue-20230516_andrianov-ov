@@ -32,40 +32,34 @@ const emails = [
 const app = createApp({
   data() {
     return {
-      emails: [...emails],
+      emails: emails,
       target: '',
     };
   },
   computed: {
-    filter() {
-      const list = document.querySelector('.list');
-      list.innerHTML = '';
-
-      let newArr = this.emails.map((email) => {
-        let item = email.toLowerCase();
-        let searchQuery = this.target.toLowerCase();
-
-        if (item.indexOf(searchQuery) >= 0 && searchQuery != '') {
-          createNode('.list', email, true);
-        } else {
-          createNode('.list', email);
-        }
-
-        function createNode(parentNode, innerText, marked = false) {
-          parentNode = document.querySelector(parentNode);
-
-          let tag = document.createElement('li');
-
-          if (marked == true) {
-            tag.classList.add('marked');
+    formatEmails() {
+      let newArray = [];
+      emails.map((email) => {
+        if (email.toLowerCase().indexOf(this.target.toLowerCase()) > -1) {
+          if (this.target == '' || this.target == null) {
+            newArray.push({
+              mail: email,
+              class: '',
+            });
+          } else {
+            newArray.push({
+              mail: email,
+              class: 'marked',
+            });
           }
-
-          tag.innerHTML = innerText;
-          parentNode.appendChild(tag);
+        } else {
+          newArray.push({
+            mail: email,
+            class: '',
+          });
         }
       });
-
-      return newArr;
+      return newArray;
     },
   },
 });
