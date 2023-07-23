@@ -26,13 +26,6 @@ export default defineComponent({
         return this.agendaItem.title;
       }
     },
-    showDescription() {
-      if (this.agendaItem.description !== null || this.agendaItem.title !== '') {
-        return this.agendaItem.description;
-      } else {
-        return false;
-      }
-    },
   },
 
   template: `
@@ -48,7 +41,7 @@ export default defineComponent({
           <span class="agenda-item__dot"></span>
           <span class="agenda-item__lang">{{ agendaItem.language }}</span>
         </p>
-        <p>{{ showDescription }}</p>
+        <p v-if="agendaItem.description">{{ agendaItem.description }}</p>
       </div>
     </div>`,
 });
