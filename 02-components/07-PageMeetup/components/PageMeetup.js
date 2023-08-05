@@ -2,8 +2,7 @@ import { defineComponent } from '../vendor/vue.esm-browser.js';
 import UiContainer from './UiContainer.js';
 import UiAlert from './UiAlert.js';
 import { fetchMeetupById } from '../meetupService.js';
-//import MeetupView from '../../06-MeetupView/components/MeetupView.js';
-import { defineAsyncComponent } from 'vue';
+import MeetupView from '../../06-MeetupView/components/MeetupView.js';
 
 export default defineComponent({
   name: 'PageMeetup',
@@ -11,52 +10,60 @@ export default defineComponent({
   data() {
     return {
       meetup: {},
-      state: ''
-    }
+      state: '',
+      errorMessage: '',
+    };
   },
 
   components: {
     UiAlert,
     UiContainer,
-    MeetupView: defineAsyncComponent(() => {
-      import('../../06-MeetupView/components/MeetupView.js')
-    })
+    MeetupView,
   },
 
   props: {
     meetupId: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
 
   methods: {
-    fetchMeetupById() {
+    getMeetupData() {
       fetchMeetupById(this.meetupId).then(
         (data) => {
-          console.log(data);
           this.state = 'done';
-          return this.meetup = data;
+          this.meetup = data;
         },
         (error) => {
-          return this.state = 'error';
-        }
+          this.state = 'error';
+          this.errorMessage = error.message;
+        },
       );
-    }
+    },
+  },
+
+  beforeMount() {
+    this.getMeetupData();
+  },
+
+  watch: {
+    meetupId: function () {
+      this.state = 'loading';
+      this.getMeetupData();
+    },
   },
 
   template: `
     <div class="page-meetup">
-      <MeetupView v-if="this.state === 'done'" :meetup="fetchMeetupById" />
+      <MeetupView v-if="state === 'done'" :meetup="meetup" />
 
-      <UiContainer v-else-if="this.state === 'error'">
-        <UiAlert>error</UiAlert>
+      <UiContainer v-else-if="state === 'error'">
+        <UiAlert>{{ errorMessage }}</UiAlert>
       </UiContainer>
 
       <UiContainer v-else>
         <UiAlert>Загрузка...</UiAlert>
       </UiContainer>
-
-
     </div>`,
 });
