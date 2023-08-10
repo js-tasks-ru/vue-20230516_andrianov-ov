@@ -11,7 +11,7 @@ export default {
   props: {
     tag: {
       type: [String, Object, Function],
-      default: 'ul',
+      default: 'div',
     },
   },
 };
