@@ -11,12 +11,12 @@ export default {
   props: {
     title: {
       type: String,
-      required: false
+      required: false,
     },
     image: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   },
 
   computed: {
